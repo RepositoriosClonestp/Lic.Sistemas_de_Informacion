@@ -1,0 +1,75 @@
+#include <stdio.h>
+
+/*tipos de datos*/
+typedef char string[50];
+
+typedef struct{
+	
+	string nombre;
+	int edad;
+	
+}t_datos;
+
+
+/*variables*/
+t_datos registro;
+
+FILE archivo;
+
+
+/*prototipos*/
+void abrir_archivo();
+
+void escribir_archivo();
+
+void cerrar_archivo();
+
+
+
+/*bloque principal*/
+int main (){
+	
+	abrir_archivo();
+	
+	escribir_archivo();
+	
+	cerrar_archivo();
+	
+	return 0;
+}
+
+
+/*funiones*/
+void abrir_archivo(){
+	
+	archivo = fopen("registro_booleano_escritura.dat","wb");
+	
+	if( archivo == NULL ){
+		
+		printf("	FILE ERROR 404	");
+		
+		fclose (archivo);
+		
+	}
+	
+}
+
+
+
+void cerrar_archivo(){
+	
+	if( feof (archivo) ){
+		
+		fclose (archivo);
+		
+	}
+	
+}
+
+
+
+void escribir_archivo(){
+	
+	
+	
+}
