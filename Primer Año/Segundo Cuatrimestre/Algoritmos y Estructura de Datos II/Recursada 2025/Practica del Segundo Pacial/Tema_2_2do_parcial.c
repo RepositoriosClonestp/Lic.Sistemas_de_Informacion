@@ -88,7 +88,7 @@ void unPedido() {
 }
 
 void finCorte() {
-    printf("\n* Cliente con mayor pedido del d�a: %s (Importe: $%.2f)\n\n",
+    printf("\n* Cliente con mayor pedido del dia: %s (Importe: $%.2f)\n\n",
            clienteMaxDia, maxImporteDia);
 
     totalGeneral += totalDia;
