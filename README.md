@@ -5,13 +5,14 @@
 La carrera se organiza en cinco años, divididos en cuatrimestres
 
 ### Primer Año
-* **Primer Cuatrimestre**
+* **Primer Cuatrimestre** 
+    * Algoritmo y Estructura de Datos I 
+    * Álgebra
+* **Segundo Cuatrimestre**
     * Lógica y Matemática Computacional 
     * Sistemas y Organizaciones
-    * Algoritmo y Estructura de Datos I
-* **Segundo Cuatrimestre** 
-    * Algoritmo y Estructura de Datos II 
-    * Álgebra
+    * Algoritmo y Estructura de Datos II
+
 
 ### Segundo Año
 * **Primer Cuatrimestre**
