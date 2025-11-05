@@ -1,0 +1,4 @@
+Primer[[:space:]]Año/* filter=lfs diff=lfs merge=lfs -text
+Segundo[[:space:]]Año/* filter=lfs diff=lfs merge=lfs -text
+Tercer[[:space:]]Año/* filter=lfs diff=lfs merge=lfs -text
+Cuarto[[:space:]]Año/* filter=lfs diff=lfs merge=lfs -text
