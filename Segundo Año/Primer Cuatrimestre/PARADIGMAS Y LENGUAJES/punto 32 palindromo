@@ -1,0 +1,35 @@
+
+*** - LOAD: A file with name $file does not exist
+Break 1 [3]> 
+(defun palindromo ()
+	(let (palabra))
+	(print "ingrese una palabra") 
+	(setq palabra (read))
+	(if equal (palabra (reverse palabra))
+		(print "es un palindromo") 
+	 )
+) 
+
+
+PALINDROMO
+Break 1 [3]> 
+
+(palindromo (itati))
+
+*** - EVAL: la funci■ ITATI no est■definida
+Es posible continuar en los siguientes puntos:
+USE-VALUE      :R1      Input a value to be used instead of (FDEFINITION 'ITATI).
+RETRY          :R2      Reintentar
+STORE-VALUE    :R3      Input a new value for (FDEFINITION 'ITATI).
+ABORT          :R4      Abort debug loop
+Break 2 [4]> 
+
+palindromo ()
+
+*** - SYSTEM::READ-EVAL-PRINT: variable PALINDROMO has no value
+Es posible continuar en los siguientes puntos:
+USE-VALUE      :R1      Input a value to be used instead of PALINDROMO.
+STORE-VALUE    :R2      Input a new value for PALINDROMO.
+ABORT          :R3      Abort debug loop
+ABORT          :R4      Abort debug loop
+Break 3 [5]> 

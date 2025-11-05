@@ -1,0 +1,36 @@
+
+*** - READ en
+       #<INPUT BUFFERED FILE-STREAM CHARACTER
+         #P"C:\\Users\\Agustina Solis\\Documents\\FACULTAD 2024\\PARADIGMAS Y LENGUAJES\\punto 313 nivel del rio" @2>
+      : no existe ning■n paquete con el nombre "EVAL"
+Break 1 [3]> 
+(defun sirvepino ()
+	(let ((altura)) 
+	(princ "ingrese la altura del pino en metros: ")
+	(setq altura (read))
+		(if (numberp altura) 
+			(esPesoUtil (pesoPino altura))
+		)
+	)
+)
+
+(defun pesoPino (altura)
+	(let ((peso 0)) 
+		(cond 
+			((<= altura 3) (setq peso (*altura 300 )))
+			((> altura 3) (setq peso (+ (* 3 300) (*200 (- altura 3)))))
+			peso) 
+	)
+)
+
+(defun esPesoUtil (peso)
+	(if ((and (<= peso 400) (>= peso 1000)) princ "le sirve a la fabrica")
+	)
+)
+
+SIRVEPINO
+Break 1 [3]> 
+*** - el c■igo contiene una lista punteada que termina con PESO
+Es posible continuar en los siguientes puntos:
+ABORT          :R1      Abort debug loop
+Break 2 [4]> 

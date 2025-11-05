@@ -1,0 +1,28 @@
+#include <stdio.h>
+int main() {
+	int array [100], n, i , d, pos, swap;
+	printf("cuantos elementos deseas ordenar?\n");
+	scanf("%d", &n);
+
+    printf("Introduce los %d numeros \n", n); 
+	for (i=0; i < n; i++)
+		scanf("%d", &array[i]);
+		
+		for (i=0; i < (n-1); i++){
+			pos=i;
+			for(d=i+1; d<n; d++){
+			  if (array[pos] > array[d])
+				pos=d;
+			}
+			if (pos!=i){
+				swap=array[i];
+				array[i]=array[pos];
+				array[pos]=swap;
+			}
+		}
+		printf("Lista ordenada:  \n");
+		for (i=0; i<n; i++)
+				printf("%d \n", array[i]);
+		
+		return 0;
+	}

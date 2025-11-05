@@ -1,0 +1,82 @@
+
+*** - LOAD: A file with name $file does not exist
+Break 1 [3]> 
+(defun mi_segundo ()
+	(let ((a) (lista)) 
+	(princ "ingrese 1 atomo y 2 valores para la lista respectivamente: ")
+	(setq a (read) lista (read))
+		(cond
+			((not (atom a)) (princ "no es un atomo"))
+			((not (listp lista)) (princ "no es una lista"))
+			(T (rplaca lista a)) 
+   		)
+	) 
+)
+
+
+MI_SEGUNDO
+Break 1 [3]> (mi_segundo)
+ingrese 1 atomo y 2 valores para la lista respectivamente: a bc
+no es una lista
+"no es una lista"
+Break 1 [3]> 
+(mi_segundo)
+ingrese 1 atomo y 2 valores para la lista respectivamente: a (b c)
+
+(A C)
+Break 1 [3]> lista
+
+*** - SYSTEM::READ-EVAL-PRINT: variable LISTA has no value
+Es posible continuar en los siguientes puntos:
+USE-VALUE      :R1      Input a value to be used instead of LISTA.
+STORE-VALUE    :R2      Input a new value for LISTA.
+ABORT          :R3      Abort debug loop
+Break 2 [4]> 
+
+(defun mi_segundo ()
+	(let ((a) (lista)) 
+	(princ "ingrese 1 atomo y 2 valores para la lista respectivamente: ")
+	(setq a (read) lista (read))
+		(cond
+			((not (atom a)) (princ "no es un atomo"))
+			((not (listp lista)) (princ "no es una lista"))
+			(T (push lista a)) 
+   		)
+	) 
+)
+
+MI_SEGUNDO
+Break 2 [4]> (mi_segundo)
+ingrese 1 atomo y 2 valores para la lista respectivamente: a '(b c)
+
+('(B C) . A)
+Break 2 [4]> 
+(mi_segundo)
+ingrese 1 atomo y 2 valores para la lista respectivamente: a (b c)
+
+((B C) . A)
+Break 2 [4]> 
+
+(defun mi_segundo ()
+	(let ((a) (lista)) 
+	(princ "ingrese 1 atomo y 2 valores para la lista respectivamente: ")
+	(setq a (read) lista (read))
+		(cond
+			((not (atom a)) (princ "no es un atomo"))
+			((not (listp lista)) (princ "no es una lista"))
+			(T (push a lista)) 
+   		)
+	) 
+)
+
+MI_SEGUNDO
+Break 2 [4]> (mi_segundo)
+ingrese 1 atomo y 2 valores para la lista respectivamente: a (b c )
+
+(A B C)
+Break 2 [4]> 
+(mi_segundo)
+ingrese 1 atomo y 2 valores para la lista respectivamente: a (3 4 5)
+
+(A 3 4 5)
+Break 2 [4]> 
