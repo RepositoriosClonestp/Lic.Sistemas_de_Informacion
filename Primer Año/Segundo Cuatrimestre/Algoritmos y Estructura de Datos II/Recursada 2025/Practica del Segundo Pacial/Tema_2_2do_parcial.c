@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define TITULO "\n***Informe de Pedidos por Día***\n\n"
+#define TITULO "\n***Informe de Pedidos por Dia***\n\n"
 
 typedef char tString[50];
 
@@ -58,7 +58,7 @@ void procesoCorte() {
     while (!feof(pedidos)) {
         principioCorte();
 
-        /* Imprimimos fecha una sola vez por día*/
+        /* Imprimimos fecha una sola vez por dia*/
         printf("%s\n", pedAnt.fecha);
 
         while (!feof(pedidos) && strcmp(ped.fecha, pedAnt.fecha) == 0) {
@@ -88,7 +88,7 @@ void unPedido() {
 }
 
 void finCorte() {
-    printf("\n* Cliente con mayor pedido del día: %s (Importe: $%.2f)\n\n",
+    printf("\n* Cliente con mayor pedido del dï¿½a: %s (Importe: $%.2f)\n\n",
            clienteMaxDia, maxImporteDia);
 
     totalGeneral += totalDia;
@@ -99,7 +99,7 @@ void finCorte() {
 
 void finalizacion() {
     printf("------------------------------------------------------------\n");
-    printf("Total de días registrados: %d\n", contadorDias);
+    printf("Total de dias registrados: %d\n", contadorDias);
     printf("Total General de Pedidos: $%.2f\n", totalGeneral);
 
     fclose(pedidos);
