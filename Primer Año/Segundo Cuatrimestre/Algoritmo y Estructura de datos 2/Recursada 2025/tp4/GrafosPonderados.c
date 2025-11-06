@@ -3,26 +3,29 @@
 #include <stdlib.h>
 #define N 10
 
-/* Declaración de tipos de datos personalizados */
+/* Declaraciï¿½n de tipos de datos personalizados */
 typedef int tVertice;
 
 typedef float tPeso;
 
+// Arco definido por sus vertices de origen y destino y su peso
 typedef struct {
 	tVertice origen;
 	tVertice destino;
 	tPeso peso;
 }tArco; 
 
-typedef bool conjuntoVertices[N];
-typedef tPeso conjuntoArcos[N][N];
+// Grafo ponderado representado mediante conjuntos de vertices y matriz de adyacencia con pesos
+typedef bool conjuntoVertices[N]; // Conjunto de vertices
+typedef tPeso conjuntoArcos[N][N]; // Conjunto de arcos con pesos
 
+// Definicion del TDA Grafo Ponderado
 typedef struct{
 	conjuntoVertices vertices;
 	conjuntoArcos arcos;
 }tGrafoPonderado;
 
-/* Declaración de los prototipos */
+/* Declaracion de los prototipos */
 void inicializarGrafo( tGrafoPonderado * );
 void agregarVertice( tGrafoPonderado *, tVertice ); 
 void agregarArco( tGrafoPonderado *, tArco ); 
@@ -34,13 +37,14 @@ void visualizarMatrizAdyacencia( tGrafoPonderado );
 void visualizarMatrizPesos( tGrafoPonderado );
 bool existeVertice( tGrafoPonderado, tVertice );
 
-/* Declaración de las variables globales */
+/* Declaracion de las variables globales */
 tGrafoPonderado grafo;
 
+// Programa Principal
 int main() {
 	tArco arco;
 	
-	inicializarGrafo( &grafo );
+	inicializarGrafo( &grafo ); // Puntero al grafo
 
 	agregarVertice( &grafo, 2 );
 	agregarVertice( &grafo, 3 );
@@ -78,8 +82,9 @@ int main() {
 	return 0;
 }
 
+// Implementacion de las funciones
 void inicializarGrafo( tGrafoPonderado * pGrafo ) {
-	// Consiste en inicializar en cero el array de vértices y
+	// Consiste en inicializar en cero el array de vï¿½rtices y
 	// la matriz de arcos 
 	int x, y;
 	for(x=0; x<N; x++){
@@ -91,10 +96,10 @@ void inicializarGrafo( tGrafoPonderado * pGrafo ) {
 	}
 	printf("Grafo inicializado!\n");
 }
-
+// Agrega un vÃ©rtice al grafo
 void agregarVertice( tGrafoPonderado * pGrafo, tVertice pVertice ) {
-	// Consiste en marcar 1 en el vértice que se desea activar en
-	// el array de vértices
+	// Consiste en marcar 1 en el vï¿½rtice que se desea activar en
+	// el array de vï¿½rtices
 	if(pVertice < N){
 		pGrafo->vertices[pVertice] = true;
 		printf("Vertice %d activado!\n", pVertice);
@@ -102,23 +107,23 @@ void agregarVertice( tGrafoPonderado * pGrafo, tVertice pVertice ) {
 		printf("Vertice invalido!\n");
 	}
 } 
-
+// Agrega un arco al grafo
 void agregarArco( tGrafoPonderado * pGrafo, tArco pArco )  {
 	// Consiste en activar el arco en la matriz de arcos siempre que exista
-	// el vértice activo
+	// el vï¿½rtice activo
 	if( pGrafo->vertices[pArco.origen] == true &&
 		pGrafo->vertices[pArco.destino] == true ) {
 		pGrafo->arcos[pArco.origen][pArco.destino] = pArco.peso;
 		printf("Arco (%d, %d) activado!\n", pArco.origen, pArco.destino);
 	}else{
 		printf("Arco invalido!\n");
-		// se podría mejorar la validación
+		// se podrï¿½a mejorar la validaciï¿½n
 	}
 }
-
+// Borra un vÃ©rtice del grafo
 void borrarVertice( tGrafoPonderado * pGrafo, tVertice pVertice )  {
-	// Consiste en desactivar el vértice del vector de vértices 
-	// si está activo
+	// Consiste en desactivar el vï¿½rtice del vector de vï¿½rtices 
+	// si estï¿½ activo
 	bool existeV = existeVertice( *pGrafo, pVertice );
 	
 	if(existeV){
@@ -127,7 +132,7 @@ void borrarVertice( tGrafoPonderado * pGrafo, tVertice pVertice )  {
 		printf("No existe el vertice que se desea quitar!\n");	
 	}	
 }
-
+// Borra un arco del grafo
 void borrarArco( tGrafoPonderado * pGrafo, tArco pArco )  {
 	// Consiste en borrar el arco si existe en la matriz de arcos
 	if( pGrafo->arcos[pArco.origen][pArco.destino] != 0.0 ) {
@@ -137,9 +142,9 @@ void borrarArco( tGrafoPonderado * pGrafo, tArco pArco )  {
 		printf("No existe el arco!\n");	
 	}
 } 
-
+// Devuelve el mayor vÃ©rtice activo
 int maximoVertice( tGrafoPonderado pGrafo )  {
-	// Consiste en obtener el valor de vértice activo más grande
+	// Consiste en obtener el valor de vï¿½rtice activo mï¿½s grande
 	int x;
 	int max = 0;
 	
@@ -151,9 +156,9 @@ int maximoVertice( tGrafoPonderado pGrafo )  {
 	
 	return max;	
 }
-
+// Muestra la matriz de adyacencia
 void visualizarMatrizAdyacencia( tGrafoPonderado pGrafo )  {
-	// Pre-condición: obtener el máximo vértice del grafo
+	// Pre-condiciï¿½n: obtener el mï¿½ximo vï¿½rtice del grafo
 	// Consiste en recorrer la matriz de arcos, e identificar si existe una arista 
 	// y mostrar 1 en su lugar y 0 en caso contrario
 	int x, y;
@@ -164,7 +169,7 @@ void visualizarMatrizAdyacencia( tGrafoPonderado pGrafo )  {
 	
 	for(x=0; x<=maxV; x++){	
 		for(y=0; y<=maxV; y++){
-			existeArista = 	( pGrafo.arcos[x][y] != 0.0 )
+			existeArista = 	( pGrafo.arcos[x][y] != 0.0 ) 
 							&& existeVertice( pGrafo, x )
 							&& existeVertice( pGrafo, y );
 			
@@ -178,8 +183,9 @@ void visualizarMatrizAdyacencia( tGrafoPonderado pGrafo )  {
 	}	
 }
 
+// Muestra la matriz de pesos
 void visualizarMatrizPesos( tGrafoPonderado pGrafo ) {
-	// Pre-condición: obtener cantidad de vértices del grafo
+	// Pre-condiciï¿½n: obtener cantidad de vï¿½rtices del grafo
 	// Consiste en recorrer la matriz de arcos, e identificar si existe una arista 
 	// y mostrar su contenido en su lugar y 0 en caso contrario
 	
@@ -206,9 +212,9 @@ void visualizarMatrizPesos( tGrafoPonderado pGrafo ) {
 	
 	
 }
-
+// Verifica si un vÃ©rtice existe
 bool existeVertice( tGrafoPonderado pGrafo, tVertice pVertice ) {
-	// Consiste en identificar s iel vértice está activo
+	// Consiste en identificar s iel vï¿½rtice estï¿½ activo
 	return pGrafo.vertices[pVertice] == true;
 }
 
