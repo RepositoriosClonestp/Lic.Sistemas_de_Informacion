@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
-#define N 15
+#define N 15  // Maximo numero de vertices
 
 /* Declaracion de tipos de datos personalizados */
 typedef int tVertice;
@@ -9,15 +9,17 @@ typedef struct {
 	float promedioPaciente;
 }tPeso;
 
+// Arco ponderado
 typedef struct {
 	tVertice origen;
 	tVertice destino;	
 	tPeso peso;	
 } tArco;
 
-typedef bool conjuntoVertices[N];
-typedef tPeso conjuntoArcos[N][N];
+typedef bool conjuntoVertices[N]; // Vector de vertices activos o no activos
+typedef tPeso conjuntoArcos[N][N]; // Matriz de adyacencia ponderada
 
+// Grafo ponderado
 typedef struct {
 	conjuntoVertices vertices;
 	conjuntoArcos arcos;

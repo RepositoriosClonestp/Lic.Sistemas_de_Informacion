@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "libGrafoPonderado.h"
 
-
+// Programa principal 
 int main() {
 	tArco arco;
 	tGrafoPonderado grafo;					
