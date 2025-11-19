@@ -13,7 +13,7 @@ typedef struct {
 typedef struct {
 	tVertice origen;
 	tVertice destino;	
-	tGrafoHospital peso;	
+	tArcoData peso;	// peso del arco
 } tArco;
 
 typedef bool conjuntoVertices[N]; // Vector de vertices activos o no activos
