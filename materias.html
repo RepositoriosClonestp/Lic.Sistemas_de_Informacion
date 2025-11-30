@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Materias — Repositorio</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#2563eb"/><path d="M7 12h10M7 8h10M7 16h7" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <div>
+          <h1>Materias</h1>
+          <small>Explora el repositorio</small>
+        </div>
+      </div>
+      <nav>
+        <a href="index.html">Inicio</a>
+        <a href="materias.html" class="active">Materias</a>
+        <a href="correlativas.html">Correlativas</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+      <footer class="sidebar-footer">
+        <small>Repositorio por defecto:</small>
+        <small class="muted">RepositoriosClonestp / Lic.Sistemas_de_Informacion</small>
+      </footer>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <h2>Explorar Materias</h2>
+        <div class="top-actions">
+          <input id="repoInput" placeholder="owner/repo (ej: RepositoriosClonestp/Lic.Sistemas_de_Informacion)" />
+          <button id="loadRepoBtn" class="btn">Cargar</button>
+        </div>
+      </header>
+
+      <section class="content">
+        <div class="panel">
+          <div class="panel-left">
+            <div id="breadcrumb" class="breadcrumb">Repositorio: <span id="repoLabel"></span></div>
+            <div id="directoryList" class="directory-list"></div>
+          </div>
+
+          <div class="panel-right">
+            <div id="viewer" class="viewer">
+              <div id="viewerHeader" class="viewer-header">Vista previa</div>
+              <div id="viewerBody" class="viewer-body">
+                <p class="muted">Selecciona una carpeta o archivo para ver detalles.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <small>© 2025 Plataforma de Materias — Navegador GitHub</small>
+      </footer>
+    </main>
+  </div>
+
+  <script src="js/common.js"></script>
+  <script src="js/materias.js"></script>
+</body>
+</html>

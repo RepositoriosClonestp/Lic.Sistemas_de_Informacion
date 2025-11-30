@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contacto</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#2563eb"/><path d="M7 12h10M7 8h10M7 16h7" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <div>
+          <h1>Contacto</h1>
+          <small>Escribinos</small>
+        </div>
+      </div>
+      <nav>
+        <a href="index.html">Inicio</a>
+        <a href="materias.html">Materias</a>
+        <a href="correlativas.html">Correlativas</a>
+        <a href="contacto.html" class="active">Contacto</a>
+      </nav>
+      <footer class="sidebar-footer">
+        <small>Formulario sin backend (FormSubmit)</small>
+      </footer>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <h2>Contacto</h2>
+        <div class="top-actions">
+          <small class="muted">Usa el formulario para enviarnos mensajes (sin backend)</small>
+        </div>
+      </header>
+
+      <section class="content contact">
+        <div class="panel contact-panel">
+          <form id="contactForm" class="contact-form" action="https://formsubmit.co/YOUR_EMAIL" method="POST">
+            <!-- Reemplaza YOUR_EMAIL por tu correo destino -->
+            <input type="hidden" name="_captcha" value="false">
+            <label>Nombre
+              <input name="name" required />
+            </label>
+            <label>Email
+              <input type="email" name="email" required />
+            </label>
+            <label>Mensaje
+              <textarea name="message" rows="6" required></textarea>
+            </label>
+            <div class="form-actions">
+              <button class="btn primary" type="submit">Enviar</button>
+              <button class="btn" type="reset">Limpiar</button>
+            </div>
+          </form>
+
+          <aside class="contact-help">
+            <h4>Instrucciones</h4>
+            <p>Cambia la acción del formulario por <code>https://formsubmit.co/TU_EMAIL</code> para recibir mensajes en tu correo. También puedes configurar redirect o recibir copia automática desde FormSubmit.</p>
+          </aside>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <small>© 2025 — Contacto</small>
+      </footer>
+    </main>
+  </div>
+
+  <script src="js/contact.js"></script>
+</body>
+</html>

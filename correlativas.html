@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Correlativas — Estado de materias</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#2563eb"/><path d="M7 12h10M7 8h10M7 16h7" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <div>
+          <h1>Correlativas</h1>
+          <small>Control de estados</small>
+        </div>
+      </div>
+      <nav>
+        <a href="index.html">Inicio</a>
+        <a href="materias.html">Materias</a>
+        <a href="correlativas.html" class="active">Correlativas</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+      <footer class="sidebar-footer">
+        <small>Estados guardados en localStorage</small>
+      </footer>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <h2>Correlativas</h2>
+        <div class="top-actions">
+          <input id="repoInputCorr" placeholder="owner/repo (opcional)" />
+          <button id="loadCorrBtn" class="btn">Cargar materias</button>
+        </div>
+      </header>
+
+      <section class="content">
+        <div class="panel">
+          <div id="corrList" class="corr-list">
+            <p class="muted">Cargá un repositorio para listar las materias y marcar su estado.</p>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <small>© 2025 — Correlativas (localStorage)</small>
+      </footer>
+    </main>
+  </div>
+
+  <script src="js/common.js"></script>
+  <script src="js/correlativas.js"></script>
+</body>
+</html>
