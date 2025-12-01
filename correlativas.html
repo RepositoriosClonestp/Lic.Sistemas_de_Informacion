@@ -20,7 +20,6 @@
         <a href="index.html">Inicio</a>
         <a href="materias.html">Materias</a>
         <a href="correlativas.html" class="active">Correlativas</a>
-        <a href="contacto.html">Contacto</a>
       </nav>
       <footer class="sidebar-footer">
         <small>Estados guardados en localStorage</small>
@@ -30,22 +29,21 @@
     <main class="main">
       <header class="topbar">
         <h2>Correlativas</h2>
-        <div class="top-actions">
-          <input id="repoInputCorr" placeholder="owner/repo (opcional)" />
-          <button id="loadCorrBtn" class="btn">Cargar materias</button>
-        </div>
       </header>
 
       <section class="content">
         <div class="panel">
+          <div id="planSelectContainer" class="plan-selector">
+            <p class="muted">Cargando…</p>
+          </div>
           <div id="corrList" class="corr-list">
-            <p class="muted">Cargá un repositorio para listar las materias y marcar su estado.</p>
+            <p class="muted">Selecciona un plan para ver las materias.</p>
           </div>
         </div>
       </section>
 
       <footer class="footer">
-        <small>© 2025 — Correlativas (localStorage)</small>
+        <small>© 2025 AgustinSt.Code</small>
       </footer>
     </main>
   </div>

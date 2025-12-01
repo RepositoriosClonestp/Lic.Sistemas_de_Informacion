@@ -30,17 +30,53 @@ async function listContents(owner, repo, path = '') {
   return res.json(); // array or file object
 }
 
+async function getRepoBranches(owner, repo) {
+  const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/branches`);
+  if (!res.ok) throw new Error('No se pudo obtener la lista de ramas.');
+  return res.json(); // array of branches
+}
+
 // Convenience: get human-friendly extension
 function extOf(name) {
   const i = name.lastIndexOf('.');
   return i === -1 ? '' : name.slice(i+1).toLowerCase();
 }
 
-function isImage(name) {
-  return ['png','jpg','jpeg','gif','svg','webp'].includes(extOf(name));
+// Helper: detecta si es imagen soportada
+function isImage(filename) {
+  const imgExts = ['png', 'jpg', 'jpeg', 'gif', 'svg', 'webp', 'bmp', 'ico'];
+  const ext = filename.split('.').pop().toLowerCase();
+  return imgExts.includes(ext);
 }
-function isPDF(name){ return extOf(name) === 'pdf'; }
-function isTextlike(name){ return ['txt','md','json','js','css','html','htm','java','c','cpp','py','sql','xml'].includes(extOf(name)); }
+
+// Helper: detecta si es PDF
+function isPDF(filename) {
+  return filename.toLowerCase().endsWith('.pdf');
+}
+
+// Helper: detecta archivos de texto y código soportados
+function isTextlike(filename) {
+  const textExts = [
+    'txt', 'md', 'html', 'htm', 'xml', 'json', 'csv',
+    'css', 'js', 'ts', 'jsx', 'tsx',
+    'java', 'c', 'h', 'cpp', 'cxx', 'cc', 'hpp', 'hxx',
+    'sql', 'rtf', 'py', 'rb', 'php', 'sh', 'bat', 'ps1',
+    'yaml', 'yml', 'toml', 'ini', 'cfg', 'log'
+  ];
+  
+  // Archivos especiales de git (sin extensión o con punto al inicio)
+  if (filename.startsWith('.git') || filename === 'LICENSE' || filename === 'README') {
+    return true;
+  }
+  
+  // Si no tiene punto, es archivo sin extensión (tratar como texto)
+  if (!filename.includes('.')) {
+    return true;
+  }
+  
+  const ext = filename.split('.').pop().toLowerCase();
+  return textExts.includes(ext);
+}
 
 function createEl(tag, props = {}, ...children) {
   const el = document.createElement(tag);

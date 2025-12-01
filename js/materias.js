@@ -1,5 +1,6 @@
 // Lógica de materias: navegación del repo y visualización de archivos
 const DEFAULT_REPO = 'RepositoriosClonestp/Lic.Sistemas_de_Informacion';
+const DEFAULT_PATH = 'Materias_por_Año';
 
 document.addEventListener('DOMContentLoaded', () => {
   const repoInput = document.getElementById('repoInput');
@@ -13,16 +14,25 @@ document.addEventListener('DOMContentLoaded', () => {
   let stack = []; // breadcrumb stack
 
   repoInput.value = DEFAULT_REPO;
-  loadBtn.addEventListener('click', () => {
+  loadBtn.addEventListener('click', async () => {
     const val = repoInput.value.trim();
     if (!val || !val.includes('/')) return alert('Indica owner/repo válido.');
     const [owner, repo] = val.split('/');
     current.owner = owner;
     current.repo = repo;
-    current.path = '';
-    stack = [];
+    current.path = DEFAULT_PATH;
+    stack = [{name: 'Materias_por_Año', path: DEFAULT_PATH}];
     repoLabel.textContent = `${owner}/${repo}`;
-    loadDirectory('');
+    
+    // Cargar ramas
+    try {
+      const branches = await getRepoBranches(owner, repo);
+      console.log('Ramas disponibles:', branches);
+    } catch (err) {
+      alert(err.message);
+    }
+    
+    loadDirectory(DEFAULT_PATH);
   });
 
   // initial load
@@ -72,9 +82,9 @@ document.addEventListener('DOMContentLoaded', () => {
       a.addEventListener('click', (e) => {
         e.preventDefault();
         if (idx === 0) {
-          stack = [];
-          current.path = '';
-          loadDirectory('');
+          stack = [{name: 'Materias_por_Año', path: DEFAULT_PATH}];
+          current.path = DEFAULT_PATH;
+          loadDirectory(DEFAULT_PATH);
         } else {
           stack = stack.slice(0, idx);
           current.path = parts[idx].path;
@@ -88,14 +98,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function showFile(file) {
     viewerBody.innerHTML = '<p class="muted">Cargando vista previa…</p>';
-    // preview for images and pdfs. Provide download link and open on GitHub.
     const name = file.name;
     const download = file.download_url;
     const githubUrl = file.html_url;
-    const ext = name.split('.').pop().toLowerCase();
 
     // build header with actions
-    const header = createEl('div', {}, createEl('strong', {}, name),
+    const header = createEl('div', {style:'margin-bottom:12px;'}, 
+      createEl('strong', {}, name),
       createEl('div', {style:'margin-top:6px; display:flex; gap:8px;'}, 
         createEl('a', {href:download, target:'_blank', class:'btn'}, 'Descargar'),
         createEl('a', {href:githubUrl, target:'_blank', class:'btn'}, 'Abrir en GitHub')
@@ -111,17 +120,54 @@ document.addEventListener('DOMContentLoaded', () => {
       const iframe = createEl('iframe', {class:'preview-iframe', src:download});
       viewerBody.appendChild(iframe);
     } else if (isTextlike(name)) {
-      // fetch raw and show in pre
+      // Usar la API de GitHub para obtener el contenido
       try {
-        const res = await fetch(download);
-        const text = await res.text();
-        const pre = createEl('pre', {style:'white-space:pre-wrap; max-height:520px; overflow:auto;'}, text);
+        const res = await fetch(file.url); // Usar file.url en lugar de download_url
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        
+        // El contenido viene en base64, decodificarlo
+        const content = data.encoding === 'base64' 
+          ? atob(data.content.replace(/\n/g, ''))
+          : data.content;
+        
+        const pre = createEl('pre', {
+          style:'white-space:pre-wrap; max-height:520px; overflow:auto; background:#f5f5f5; padding:12px; border-radius:4px; font-size:13px; line-height:1.5;'
+        }, content);
         viewerBody.appendChild(pre);
       } catch (e) {
-        viewerBody.appendChild(createEl('p', {class:'muted'}, 'No se pudo cargar el archivo para vista previa.'));
+        viewerBody.appendChild(createEl('p', {class:'muted'}, `No se pudo cargar el archivo: ${e.message}`));
+        console.error('Error loading file:', e);
       }
     } else {
       viewerBody.appendChild(createEl('p', {class:'muted'}, 'Vista previa no disponible para este tipo de archivo. Usa "Descargar" o "Abrir en GitHub".'));
     }
+  }
+
+  // Helper: detecta si es imagen soportada
+  function isImage(filename) {
+    const imgExts = ['png', 'jpg', 'jpeg', 'gif', 'svg', 'webp', 'bmp', 'ico'];
+    const ext = filename.split('.').pop().toLowerCase();
+    return imgExts.includes(ext);
+  }
+
+  // Helper: detecta si es PDF
+  function isPDF(filename) {
+    return filename.toLowerCase().endsWith('.pdf');
+  }
+
+  // Helper: detecta archivos de texto y código soportados
+  function isTextlike(filename) {
+    const textExts = [
+      'txt', 'md', 'html', 'htm', 'xml', 'json', 'csv',
+      'css', 'js', 'ts', 'jsx', 'tsx',
+      'java', 'c', 'h', 'cpp', 'cxx', 'cc', 'hpp', 'hxx',
+      'sql', 'rtf', 'py', 'rb', 'php', 'sh', 'bat', 'ps1',
+      'yaml', 'yml', 'toml', 'ini', 'cfg', 'log'
+    ];
+    const ext = filename.split('.').pop().toLowerCase();
+    // Archivos sin extensión o .gitattributes, etc.
+    if (!filename.includes('.') || filename.startsWith('.git')) return true;
+    return textExts.includes(ext);
   }
 });
